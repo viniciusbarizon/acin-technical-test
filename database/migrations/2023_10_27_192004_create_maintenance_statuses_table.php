@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('maintenance_conditions', function (Blueprint $table) {
+        Schema::create('maintenance_statuses', function (Blueprint $table) {
             $table->ulid('id');
             $table->primary('id');
 
-            $table->string('condition', 20)->unique();
+            $table->string('status', 20)->unique();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
