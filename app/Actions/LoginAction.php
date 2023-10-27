@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class LoginAction
 {
@@ -17,6 +18,12 @@ class LoginAction
 
         $this->setUser();
 
+        if ($this->checkPassword() === false) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
         return $this->getToken();
     }
 
@@ -24,7 +31,7 @@ class LoginAction
         $this->user = User::where('email', $this->email)->firstOrFail();
     }
 
-    private function hashCheck(): bool {
+    private function checkPassword(): bool {
         return Hash::check($this->password, $this->user->password);
     }
 
