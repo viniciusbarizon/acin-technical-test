@@ -6,13 +6,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class LoginAction
+class TokenAction
 {
     private string $email;
     private ?User $user;
     private string $password;
 
-    public function login(string $email, string $password): string {
+    public function get(string $email, string $password): string {
         $this->email = $email;
         $this->password = $password;
 
