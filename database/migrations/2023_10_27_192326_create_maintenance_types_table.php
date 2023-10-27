@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id');
             $table->primary('id');
 
-            $table->string('type', 20)->unique();
+            $table->string('type', 40)->unique();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
