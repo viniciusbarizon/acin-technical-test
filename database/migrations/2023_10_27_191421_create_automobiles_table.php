@@ -16,6 +16,7 @@ return new class extends Migration
             $table->primary('id');
 
             $table->string('registration', 11)->unique();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
