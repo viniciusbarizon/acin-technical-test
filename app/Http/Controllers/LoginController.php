@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function login(): string {
+    public function __invoke(): string {
         return json_encode([
             'token' => $this->getToken()
         ]);
