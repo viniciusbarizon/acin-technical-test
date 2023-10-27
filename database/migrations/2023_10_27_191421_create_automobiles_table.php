@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('automobiles', function (Blueprint $table) {
             $table->ulid('id');
             $table->primary('id');
 
-            $table->string('email', 320)->unique();
-            $table->string('name', 45);
-            $table->biginteger('telephone')->unsigned();
-
+            $table->string('registration', 11)->unique();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
+
+            $table->foreignUlid('brand_id')->constrained();
+            $table->foreignUlid('customer_id')->constrained();
+            $table->foreignUlid('owner_id')->constrained();
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('automobiles');
     }
 };

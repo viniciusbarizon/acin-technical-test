@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->ulid('id');
+            $table->primary('id');
+
             $table->string('name', 20)->unique();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
