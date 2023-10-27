@@ -2,12 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LoginActionTest extends TestCase
 {
+    use RefreshDatabase;
+
     private $response;
 
     public function test_login(): void
@@ -17,16 +20,18 @@ class LoginActionTest extends TestCase
     }
 
     private function setResponse(): void {
-        $this->response = $this->postJson(
+        $this->response = $this->post(
             '/api/login',
-            ['email' => 'ara87@example.com', 'password' => 'password']
+            ['email' => $this->getEmail(), 'password' => 'password']
         );
+    }
+
+    private function getEmail(): string {
+        return User::first()->email;
     }
 
     private function assertToken(): void {
         $this->response->assertStatus(200)
-            ->assertJson([
-                'token' => 'abc',
-            ]);
+            ->assertJsonStructure(['token']);
     }
 }

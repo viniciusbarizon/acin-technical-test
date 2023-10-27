@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\LoginAction;
+use App\Actions\TokenAction;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     public function login(): string {
-        return $this->getToken();
+        return json_encode([
+            'token' => $this->getToken()
+        ]);
     }
 
     private function getToken(): string {
