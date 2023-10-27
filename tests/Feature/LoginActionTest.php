@@ -13,7 +13,7 @@ class LoginActionTest extends TestCase
 
     private $response;
 
-    public function test_login(): void
+    public function test_it_gets_a_token_after_login(): void
     {
         $this->setResponse();
         $this->assertToken();
