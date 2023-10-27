@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Owner;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class OwnerSeeder extends Seeder
 {
@@ -13,17 +13,8 @@ class OwnerSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('owners')->insert([
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-            ['id' => str()->ulid(), 'name' => fake()->name],
-        ]);
+        for ($i = 1; $i <= 10; $i++) {
+            Owner::factory()->create();
+        }
     }
 }
