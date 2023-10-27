@@ -6,13 +6,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class TokenAction
+class LoginAction
 {
     private string $email;
     private ?User $user;
     private string $password;
 
-    public function get(string $email, string $password): string {
+    public function getToken(string $email, string $password): string {
         $this->email = $email;
         $this->password = $password;
 
@@ -24,7 +24,7 @@ class TokenAction
             ]);
         }
 
-        return $this->getToken();
+        return $this->createToken();
     }
 
     private function setUser(): void {
@@ -35,7 +35,7 @@ class TokenAction
         return Hash::check($this->password, $this->user->password);
     }
 
-    private function getToken(): string {
+    private function createToken(): string {
         return $this->user->createToken(time())->plainTextToken;
     }
 }

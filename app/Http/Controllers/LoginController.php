@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\TokenAction;
+use App\Actions\LoginAction;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -14,7 +14,7 @@ class LoginController extends Controller
     }
 
     private function getToken(): string {
-        return (new TokenAction)->get(
+        return (new LoginAction)->getToken(
             email: request()->email,
             password: request()->password
         );
