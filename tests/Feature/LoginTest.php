@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class LoginActionTest extends TestCase
+class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    private $response;
+    private TestResponse $response;
 
     public function test_it_gets_a_token_after_login(): void
     {

@@ -36,6 +36,7 @@ class LoginAction
     }
 
     private function createToken(): string {
-        return $this->user->createToken(time())->plainTextToken;
+        return $this->user->createToken(time(), ['create:read:update:delete'])
+            ->plainTextToken;
     }
 }
