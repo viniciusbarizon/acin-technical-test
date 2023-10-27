@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BrandSeeder::class,
             OwnerSeeder::class,
-            MaintenanceType::class,
-            MaintenanceStatus::class,
+            MaintenanceTypeSeeder::class,
+            MaintenanceStatusSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
