@@ -15,6 +15,8 @@ return new class extends Migration
             $table->ulid('id');
             $table->primary('id');
 
+            $table->decimal('price', $precision = 9, $scale = 2);
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
