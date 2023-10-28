@@ -40,7 +40,7 @@ class ReaderActionTest extends TestCase
     }
 
     private function read(): void {
-        $this->brandRead = (new ReaderAction)->execute(
+        $this->brandRead = (new ReaderAction)->read(
             id: $this->id,
             model: Brand::class,
             resource: BrandResource::class
@@ -48,6 +48,8 @@ class ReaderActionTest extends TestCase
     }
 
     private function assertReader(): void {
-        $this->assertEquals($this->brand->id, $this->brandRead->id);
+        $this->assertTrue(
+            $this->brand->is($this->brandRead)
+        );
     }
 }
