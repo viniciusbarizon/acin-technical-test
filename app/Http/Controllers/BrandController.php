@@ -58,7 +58,14 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return json_encode(
+            (new EditionAction)->edit(
+                data: $request->post(),
+                id: $id,
+                model: self::MODEL,
+                resource: self::RESOURCE
+            )
+        );
     }
 
     /**
