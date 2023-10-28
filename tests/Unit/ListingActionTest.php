@@ -15,14 +15,26 @@ use Tests\TestCase;
 class ListingActionTest extends TestCase
 {
     private Collection $brands;
+    private Brand $brand;
     private BrandResource $list;
+    private ?array $wheres = null;
 
-    public function test_it_lists(): void
+    public function test_it_lists_all_brands(): void
     {
         $this->setBrands();
         $this->list();
 
-        $this->assertCollection();
+        $this->assertNoFilter();
+    }
+
+    public function test_it_lists_with_filter(): void
+    {
+        $this->setBrand();
+        $this->setWheres();
+
+        $this->list();
+
+        $this->assertFilter();
     }
 
     private function setBrands(): void
@@ -30,18 +42,43 @@ class ListingActionTest extends TestCase
         $this->brands = Brand::all();
     }
 
+    private function setBrand(): void
+    {
+        $this->brand = Brand::inRandomOrder()->first();
+    }
+
+    private function setWheres(): void
+    {
+        $this->wheres = ['name' => $this->brand->name];
+    }
+
     private function list(): void
     {
         $this->list = (new ListingAction)->list(
             model: Brand::class,
-            resource: BrandResource::class
+            resource: BrandResource::class,
+            wheres: $this->wheres
         );
     }
 
-    private function assertCollection(): void
+    private function assertNoFilter(): void
     {
         foreach ($this->brands as $brand) {
-            $this->assertTrue($this->list->contains($brand));
+            $this->assertTrue(
+                $this->list->contains($brand)
+            );
         }
+    }
+
+    private function assertFilter(): void
+    {
+        $this->assertTrue(
+            $this->list->contains($this->brand)
+        );
+
+        $this->assertEquals(
+            1,
+            $this->list->count()
+        );
     }
 }
