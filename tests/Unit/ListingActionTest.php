@@ -39,6 +39,16 @@ class ListingActionTest extends TestCase
         $this->assertFilter();
     }
 
+    public function test_it_lists_with_pagination(): void
+    {
+        $this->setBrands();
+        $this->paginate = 5;
+
+        $this->list();
+
+        $this->assertPagination();
+    }
+
     private function setBrands(): void
     {
         $this->brands = Brand::all();
@@ -83,6 +93,14 @@ class ListingActionTest extends TestCase
 
         $this->assertEquals(
             1,
+            $this->list->count()
+        );
+    }
+
+    private function assertPagination(): void
+    {
+        $this->assertEquals(
+            $this->paginate,
             $this->list->count()
         );
     }
