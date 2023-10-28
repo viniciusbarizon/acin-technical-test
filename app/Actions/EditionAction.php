@@ -26,9 +26,9 @@ class EditionAction
         }
     }
 
-    private function update(): void
+    private function update()
     {
-        tap($this->model::findOrFail($this->id))
+        return tap($this->model::findOrFail($this->id))
             ->update($this->data);
     }
 

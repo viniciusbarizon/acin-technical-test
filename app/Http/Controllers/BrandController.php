@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\EditionAction;
+use App\Actions\InsertionAction;
 use App\Actions\ListingAction;
 use App\Actions\ReadingAction;
 use App\Actions\RemovalAction;

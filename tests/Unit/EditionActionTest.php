@@ -54,7 +54,7 @@ class EditionActionTest extends TestCase
 
     private function setBrand(): void
     {
-        $this->brand = Brand::domOrder()->first();
+        $this->brand = Brand::inRandomOrder()->first();
     }
 
     private function setId(): void
