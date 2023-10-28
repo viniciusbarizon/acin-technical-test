@@ -6,7 +6,8 @@ use Illuminate\Database\QueryException;
 
 class InsertionAction
 {
-    public function insert(array $data, string $model, string $resource): mixed {
+    public function insert(array $data, string $model, string $resource): mixed
+    {
         try {
             return new $resource(
                 $model::create($data)

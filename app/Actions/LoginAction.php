@@ -12,7 +12,8 @@ class LoginAction
     private ?User $user;
     private string $password;
 
-    public function getToken(string $email, string $password): string {
+    public function getToken(string $email, string $password): string
+    {
         $this->email = $email;
         $this->password = $password;
 
@@ -27,15 +28,18 @@ class LoginAction
         return $this->createToken();
     }
 
-    private function setUser(): void {
+    private function setUser(): void
+    {
         $this->user = User::where('email', $this->email)->firstOrFail();
     }
 
-    private function checkPassword(): bool {
+    private function checkPassword(): bool
+    {
         return Hash::check($this->password, $this->user->password);
     }
 
-    private function createToken(): string {
+    private function createToken(): string
+    {
         return $this->user->createToken(time(), ['create:read:update:delete'])
             ->plainTextToken;
     }

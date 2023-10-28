@@ -26,12 +26,14 @@ class EditionAction
         }
     }
 
-    private function update(): void {
+    private function update(): void
+    {
         tap($this->model::findOrFail($this->id))
             ->update($this->data);
     }
 
-    private function getConflictResponse(): Response {
+    private function getConflictResponse(): Response
+    {
         return response('Please, do not use values used by other records', 409);
     }
 }
