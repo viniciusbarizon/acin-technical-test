@@ -18,9 +18,11 @@ class BrandController extends Controller
      */
     public function index()
     {
-        (new ReadingAction)->list(
-            model: self::MODEL,
-            resource: self::RESOURCE
+        return json_encode(
+            (new ListingAction)->list(
+                model: self::MODEL,
+                resource: self::RESOURCE
+            )
         );
     }
 
