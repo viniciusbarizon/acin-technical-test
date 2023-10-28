@@ -21,7 +21,9 @@ class BrandController extends Controller
         return json_encode(
             (new ListingAction)->list(
                 model: self::MODEL,
-                resource: self::RESOURCE
+                resource: self::RESOURCE,
+                whereColumn: request()->whereColumn,
+                whereValue: request()->whereValue
             )
         );
     }

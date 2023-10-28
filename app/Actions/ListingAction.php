@@ -8,12 +8,14 @@ class ListingAction {
     private string $model;
     private string $orderByColumn;
     private string $orderByDirection;
-    private ?array $wheres;
+    private ?string $whereColumn;
+    private ?string $whereValue;
 
-    public function list(string $model, string $resource, array $wheres = null): JsonResource
+    public function list(string $model, string $resource, ?string $whereColumn = null, ?string $whereValue = null): JsonResource
     {
         $this->model = $model;
-        $this->wheres = $wheres;
+        $this->whereColumn = $whereColumn;
+        $this->whereValue = $whereValue;
 
         return new $resource(
             $this->getList()
@@ -22,8 +24,9 @@ class ListingAction {
 
     private function getList()
     {
-        if (is_null($this->wheres) === false) {
-            return $this->model::where($this->wheres)->get();
+        if (is_null($this->whereColumn) === false) {
+            return $this->model::where($this->whereColumn, "like", "%" . $this->whereValue . "%")
+                ->get();
         }
 
         return $this->model::get();

@@ -17,7 +17,8 @@ class ListingActionTest extends TestCase
     private Collection $brands;
     private Brand $brand;
     private BrandResource $list;
-    private ?array $wheres = null;
+    private ?string $whereColumn = null;
+    private ?string $whereValue = null;
 
     public function test_it_lists_all_brands(): void
     {
@@ -49,7 +50,8 @@ class ListingActionTest extends TestCase
 
     private function setWheres(): void
     {
-        $this->wheres = ['name' => $this->brand->name];
+        $this->whereColumn = "name";
+        $this->whereValue = $this->brand->name;
     }
 
     private function list(): void
@@ -57,7 +59,8 @@ class ListingActionTest extends TestCase
         $this->list = (new ListingAction)->list(
             model: Brand::class,
             resource: BrandResource::class,
-            wheres: $this->wheres
+            whereColumn: $this->whereColumn,
+            whereValue: $this->whereValue
         );
     }
 
