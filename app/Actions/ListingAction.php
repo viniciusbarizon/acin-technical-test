@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ListingAction {
-    private $model;
+    private string $model;
     private string $orderByColumn;
     private string $orderByDirection;
     private ?int $paginate;
@@ -15,7 +15,7 @@ class ListingAction {
     private ?string $whereValue;
 
     public function list(
-        $model,
+        string $model,
         ?int $paginate = null,
         string $resource,
         ?string $whereColumn = null,
@@ -34,7 +34,7 @@ class ListingAction {
 
     private function getList(): Collection|LengthAwarePaginator
     {
-        $result = $this->model->withTrashed();
+        $result = $this->model::withTrashed();
 
         if (is_string($this->whereColumn) && is_null($this->whereValue) === false) {
             $result = $result->where($this->whereColumn, "like", "%" . $this->whereValue . "%");

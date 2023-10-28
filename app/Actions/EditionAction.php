@@ -9,6 +9,7 @@ class EditionAction
 {
     private array $data;
     private string $id;
+    private string $model;
 
     public function edit(array $data, string $id, string $model, string $resource): mixed
     {
@@ -18,18 +19,12 @@ class EditionAction
 
         try {
             return new $resource(
-                $this->update()
+                tap($this->model::findOrFail($this->id))->update($this->data)
             );
         }
         catch (QueryException) {
             return $this->getConflictResponse();
         }
-    }
-
-    private function update()
-    {
-        return tap($this->model::findOrFail($this->id))
-            ->update($this->data);
     }
 
     private function getConflictResponse(): Response
