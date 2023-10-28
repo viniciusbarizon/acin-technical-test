@@ -9,11 +9,9 @@ class ListingAction {
     private string $orderByColumn;
     private string $orderByDirection;
 
-    public function list(string $model, string $orderByColumn, string $orderByDirection, string $resource): JsonResource
+    public function list(string $model, string $resource): JsonResource
     {
         $this->model = $model;
-        $this->orderByColumn = $orderByColumn;
-        $this->orderByDirection = $orderByDirection;
 
         return new $resource(
             $this->getList()
@@ -22,7 +20,6 @@ class ListingAction {
 
     private function getList()
     {
-        return $this->model::orderBy($this->orderByColumn, $this->orderByDirection)
-            ->get();
+        return $this->model::get();
     }
 }

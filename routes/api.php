@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', LoginController::class);
 
-Route::apiResource('brands', BrandController::class)->only('show');
+Route::apiResource('brands', BrandController::class)->only('index');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', LogoutController::class);

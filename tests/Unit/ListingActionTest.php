@@ -16,8 +16,6 @@ class ListingActionTest extends TestCase
 {
     private Collection $brands;
     private BrandResource $list;
-    private string $orderByColumn = 'name';
-    private string $orderByDirection = 'asc';
 
     public function test_it_lists(): void
     {
@@ -25,15 +23,6 @@ class ListingActionTest extends TestCase
         $this->list();
 
         $this->assertCollection();
-    }
-
-    public function test_it_returns_query_exception_if_order_by_column_not_exist(): void
-    {
-        $this->expectException(QueryException::class);
-
-        $this->orderByColumn = 'not_exist';
-
-        $this->list();
     }
 
     private function setBrands(): void
@@ -45,9 +34,7 @@ class ListingActionTest extends TestCase
     {
         $this->list = (new ListingAction)->list(
             model: Brand::class,
-            resource: BrandResource::class,
-            orderByColumn: $this->orderByColumn,
-            orderByDirection: $this->orderByDirection
+            resource: BrandResource::class
         );
     }
 
