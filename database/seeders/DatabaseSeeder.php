@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             OwnerSeeder::class,
             MaintenanceTypeSeeder::class,
             MaintenanceStatusSeeder::class,
+            UserRoleSeeder::class,
             UserSeeder::class,
         ]);
     }
