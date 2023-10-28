@@ -17,8 +17,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->job(
             new SendWeekNewData()
-        )->everyMinute()
-        ->appendOutputTo("/storage/logs/jobs.log");
+        )->everyMinute();
     }
 
     /**

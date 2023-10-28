@@ -3,17 +3,22 @@
 namespace App\Jobs;
 
 use App\Models\Brand;
+use App\Models\UserRole;
+use App\Mail\WeekNewData;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SendWeekNewData implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    private $reporters;
 
     /**
      * Create a new job instance.
@@ -26,6 +31,9 @@ class SendWeekNewData implements ShouldQueue
     public function handle(): void
     {
         $this->storeExcel();
+
+        $this->setReporters();
+        $this->sendEmail();
     }
 
     private function storeExcel(): void
@@ -35,8 +43,16 @@ class SendWeekNewData implements ShouldQueue
             ->storeExcel('excel/week-new-data.xlsx');
     }
 
+    private function setReporters(): void
+    {
+        $this->reporters = UserRole::where('role', 'reporter')->first()->users;
+    }
+
     private function sendEmail(): void
     {
-
+        foreach ($this->reporters as $reporter) {
+            Mail::to($reporter->email)
+                ->send(new WeekNewData);
+        }
     }
 }
