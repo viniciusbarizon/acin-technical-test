@@ -43,7 +43,7 @@ class BrandController extends Controller
             (new ReadingAction)->read(
                 id: $id,
                 model: self::MODEL,
-                resource: BrandResource::class
+                resource: self::RESOURCE
             )
         );
     }
