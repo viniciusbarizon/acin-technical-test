@@ -37,7 +37,13 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return json_encode(
+            (new InsertionAction)->insert(
+                data: $request->post(),
+                model: self::MODEL,
+                resource: self::RESOURCE
+            )
+        );
     }
 
     /**
