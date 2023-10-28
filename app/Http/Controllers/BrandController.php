@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\ListingAction;
 use App\Actions\ReadingAction;
+use App\Actions\RemovalAction;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -64,6 +65,12 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return json_encode(
+            (new RemovalAction)->read(
+                id: $id,
+                model: self::MODEL,
+                resource: self::RESOURCE
+            )
+        );
     }
 }

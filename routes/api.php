@@ -26,5 +26,6 @@ Route::post('/login', LoginController::class);
 Route::apiResource('brands', BrandController::class)->only('index');
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('brands', BrandController::class)->except('index');
     Route::post('/logout', LogoutController::class);
 });
