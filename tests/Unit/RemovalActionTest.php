@@ -14,10 +14,13 @@ class RemovalActionTest extends TestCase
 {
     use RefreshDatabase;
 
+    private Brand $brand;
     private string $id;
 
     public function test_it_deletes_a_brand(): void {
+        $this->setBrand();
         $this->setId();
+
         $this->remove();
 
         $this->assertDeleted();
@@ -31,8 +34,12 @@ class RemovalActionTest extends TestCase
         $this->remove();
     }
 
+    private function setBrand(): void {
+        $this->brand = Brand::inRandomOrder()->first();
+    }
+
     private function setId(): void {
-        $this->id = Brand::inRandomOrder()->first()->id;
+        $this->id = $this->brand->id;
     }
 
     private function remove(): void {
@@ -44,9 +51,6 @@ class RemovalActionTest extends TestCase
     }
 
     private function assertDeleted(): void {
-        $this->assertDatabaseMissing('brands', [
-            'id' => $this->id,
-            'deleted_at' => null
-        ]);
+        $this->assertSoftDeleted($this->brand);
     }
 }

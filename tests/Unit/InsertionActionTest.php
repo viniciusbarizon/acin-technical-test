@@ -21,12 +21,7 @@ class InsertionActionTest extends TestCase
     {
         $this->setBrand();
 
-        $this->assertEquals(
-            $this->resource,
-            get_class($this->insert())
-        );
-
-        $this->assertInsert();
+        $this->assertInserted();
     }
 
     public function test_it_returns_http_code_conflict_if_brand_already_exists(): void
@@ -48,12 +43,12 @@ class InsertionActionTest extends TestCase
     {
         return (new InsertionAction)->insert(
             data: $this->brand,
-            model: $this->model,
-            resource: $this->resource
+            model: Brand::class,
+            resource: BrandResource::class
         );
     }
 
-    private function assertInsert(): void
+    private function assertInserted(): void
     {
         $this->assertDatabaseHas(
             'brands',
