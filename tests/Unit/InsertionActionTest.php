@@ -16,7 +16,8 @@ class InsertionActionTest extends TestCase
     private Brand $brand;
     private $response;
 
-    public function test_it_inserts_a_brand(): void {
+    public function test_it_inserts_a_brand(): void
+    {
         $this->setBrand();
 
         $this->insert();
@@ -24,7 +25,8 @@ class InsertionActionTest extends TestCase
         $this->assertInserted();
     }
 
-    public function test_it_returns_http_code_conflict_if_brand_already_exists(): void {
+    public function test_it_returns_http_code_conflict_if_brand_already_exists(): void
+    {
         $this->brand = Brand::first();
 
         $this->insert();
@@ -32,11 +34,13 @@ class InsertionActionTest extends TestCase
         $this->assertEquals($this->response->getStatusCode(), 409);
     }
 
-    private function setBrand(): void {
+    private function setBrand(): void
+    {
         $this->brand = Brand::factory()->make();
     }
 
-    private function insert(): void {
+    private function insert(): void
+    {
         $this->response = (new InsertionAction)->insert(
             data: $this->brand->toArray(),
             model: Brand::class,
@@ -44,7 +48,8 @@ class InsertionActionTest extends TestCase
         );
     }
 
-    private function assertInserted(): void {
+    private function assertInserted(): void
+    {
         $this->assertDatabaseHas('brands', ['name' => $this->brand->name]);
     }
 }

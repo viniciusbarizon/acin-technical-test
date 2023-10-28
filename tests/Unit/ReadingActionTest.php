@@ -14,7 +14,8 @@ class ReadingActionTest extends TestCase
     private Brand $brand;
     private BrandResource $brandRead;
 
-    public function test_it_reads(): void {
+    public function test_it_reads(): void
+    {
         $this->setBrand();
         $this->setId();
 
@@ -23,7 +24,8 @@ class ReadingActionTest extends TestCase
         $this->assertReader();
     }
 
-    public function test_id_returns_model_not_found_exception_if_does_not_exist(): void {
+    public function test_id_returns_model_not_found_exception_if_does_not_exist(): void
+    {
         $this->expectException(ModelNotFoundException::class);
 
         $this->id = 999999;
@@ -31,15 +33,18 @@ class ReadingActionTest extends TestCase
         $this->read();
     }
 
-    private function setBrand(): void {
+    private function setBrand(): void
+    {
         $this->brand = Brand::inRandomOrder()->first();
     }
 
-    private function setId(): void {
+    private function setId(): void
+    {
         $this->id = $this->brand->id;
     }
 
-    private function read(): void {
+    private function read(): void
+    {
         $this->brandRead = (new ReadingAction)->read(
             id: $this->id,
             model: Brand::class,
@@ -47,7 +52,8 @@ class ReadingActionTest extends TestCase
         );
     }
 
-    private function assertReader(): void {
+    private function assertReader(): void
+    {
         $this->assertTrue(
             $this->brand->is($this->brandRead)
         );

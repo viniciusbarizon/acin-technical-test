@@ -17,7 +17,8 @@ class RemovalActionTest extends TestCase
     private Brand $brand;
     private string $id;
 
-    public function test_it_deletes_a_brand(): void {
+    public function test_it_deletes_a_brand(): void
+    {
         $this->setBrand();
         $this->setId();
 
@@ -26,7 +27,8 @@ class RemovalActionTest extends TestCase
         $this->assertDeleted();
     }
 
-    public function test_it_returns_model_not_found_exception_if_brand_does_not_exist(): void {
+    public function test_it_returns_model_not_found_exception_if_brand_does_not_exist(): void
+    {
         $this->expectException(ModelNotFoundException::class);
 
         $this->id = 999999;
@@ -34,15 +36,18 @@ class RemovalActionTest extends TestCase
         $this->remove();
     }
 
-    private function setBrand(): void {
+    private function setBrand(): void
+    {
         $this->brand = Brand::inRandomOrder()->first();
     }
 
-    private function setId(): void {
+    private function setId(): void
+    {
         $this->id = $this->brand->id;
     }
 
-    private function remove(): void {
+    private function remove(): void
+    {
         (new RemovalAction)->delete(
             id: $this->id,
             model: Brand::class,
@@ -50,7 +55,8 @@ class RemovalActionTest extends TestCase
         );
     }
 
-    private function assertDeleted(): void {
+    private function assertDeleted(): void
+    {
         $this->assertSoftDeleted($this->brand);
     }
 }

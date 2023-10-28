@@ -19,7 +19,8 @@ class EditionActionTest extends TestCase
     private string $name;
     private $response;
 
-    public function test_it_updates(): void {
+    public function test_it_updates(): void
+    {
         $this->setBrand();
         $this->setId();
         $this->name = $this->getFakeName();
@@ -30,7 +31,8 @@ class EditionActionTest extends TestCase
         $this->assertNewName();
     }
 
-    public function test_it_returns_model_not_found_exception_if_not_found(): void {
+    public function test_it_returns_model_not_found_exception_if_not_found(): void
+    {
         $this->expectException(ModelNotFoundException::class);
 
         $this->id = 999999;
@@ -39,7 +41,8 @@ class EditionActionTest extends TestCase
         $this->edit();
     }
 
-    public function test_it_returns_http_code_conflict_if_name_already_exists(): void {
+    public function test_it_returns_http_code_conflict_if_name_already_exists(): void
+    {
         $this->setBrand();
         $this->setId();
         $this->name = $this->getNameAlreadyExists();
@@ -49,23 +52,28 @@ class EditionActionTest extends TestCase
         $this->assertEquals($this->response->getStatusCode(), 409);
     }
 
-    private function setBrand(): void {
+    private function setBrand(): void
+    {
         $this->brand = Brand::inRandomOrder()->first();
     }
 
-    private function setId(): void {
+    private function setId(): void
+    {
         $this->id = $this->brand->id;
     }
 
-    private function getFakeName(): string {
+    private function getFakeName(): string
+    {
         return fake()->company;
     }
 
-    private function getNameAlreadyExists(): string {
+    private function getNameAlreadyExists(): string
+    {
         return Brand::where('id', '!=', $this->id)->first()->name;
     }
 
-    private function edit(): void {
+    private function edit(): void
+    {
         $this->response = (new EditionAction)->edit(
             data: ['name' => $this->name],
             id: $this->id,
@@ -74,11 +82,13 @@ class EditionActionTest extends TestCase
         );
     }
 
-    private function refreshModel(): void {
+    private function refreshModel(): void
+    {
         $this->brand->refresh();
     }
 
-    private function assertNewName(): void {
+    private function assertNewName(): void
+    {
         $this->assertEquals($this->name, $this->brand->name);
     }
 
