@@ -24,8 +24,8 @@ class EditionActionTest extends TestCase
         $this->setId();
         $this->name = $this->getFakeName();
 
-        $this->update();
-        $this->freshModel();
+        $this->edit();
+        $this->refreshModel();
 
         $this->assertNewName();
     }
@@ -36,7 +36,7 @@ class EditionActionTest extends TestCase
         $this->id = 999999;
         $this->name = $this->getFakeName();
 
-        $this->update();
+        $this->edit();
     }
 
     public function test_it_returns_http_code_conflict_if_name_already_exists(): void {
@@ -44,7 +44,7 @@ class EditionActionTest extends TestCase
         $this->setId();
         $this->name = $this->getNameAlreadyExists();
 
-        $this->update();
+        $this->edit();
 
         $this->assertEquals($this->response->getStatusCode(), 409);
     }
@@ -65,8 +65,8 @@ class EditionActionTest extends TestCase
         return Brand::where('id', '!=', $this->id)->first()->name;
     }
 
-    private function update(): void {
-        $this->response = (new EditionAction)->execute(
+    private function edit(): void {
+        $this->response = (new EditionAction)->edit(
             data: ['name' => $this->name],
             id: $this->id,
             model: Brand::class,
@@ -74,8 +74,8 @@ class EditionActionTest extends TestCase
         );
     }
 
-    private function freshModel(): void {
-        $this->brand->fresh();
+    private function refreshModel(): void {
+        $this->brand->refresh();
     }
 
     private function assertNewName(): void {
