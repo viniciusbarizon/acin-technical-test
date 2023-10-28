@@ -49,7 +49,7 @@ class WeekNewData extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromStorage('/excel/week-new-data.xls'),
+            Attachment::fromStorage('excel/week-new-data.xlsx'),
         ];
     }
 }
