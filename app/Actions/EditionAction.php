@@ -8,7 +8,9 @@ use Illuminate\Http\Response;
 class EditionAction
 {
     private array $data;
+
     private string $id;
+
     private string $model;
 
     public function edit(array $data, string $id, string $model, string $resource): mixed
@@ -21,8 +23,7 @@ class EditionAction
             return new $resource(
                 tap($this->model::findOrFail($this->id))->update($this->data)
             );
-        }
-        catch (QueryException) {
+        } catch (QueryException) {
             return $this->getConflictResponse();
         }
     }

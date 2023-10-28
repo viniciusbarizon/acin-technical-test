@@ -2,17 +2,15 @@
 
 namespace App\Jobs;
 
+use App\Mail\WeekNewData;
 use App\Models\Brand;
 use App\Models\UserRole;
-use App\Mail\WeekNewData;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use Maatwebsite\Excel\Facades\Excel;
 
 class SendWeekNewData implements ShouldQueue
 {
@@ -23,7 +21,9 @@ class SendWeekNewData implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     /**
      * Execute the job.
@@ -38,7 +38,7 @@ class SendWeekNewData implements ShouldQueue
 
     private function storeExcel(): void
     {
-        Brand::whereBetween('created_at', [now()->subWeek()->format("Y-m-d H:i:s"), now()])
+        Brand::whereBetween('created_at', [now()->subWeek()->format('Y-m-d H:i:s'), now()])
             ->get()
             ->storeExcel('excel/week-new-data.xlsx');
     }

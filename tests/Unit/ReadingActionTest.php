@@ -3,15 +3,15 @@
 namespace Tests\Unit;
 
 use App\Actions\ReadingAction;
-use App\Models\Brand;
 use App\Http\Resources\BrandResource;
-use Error;
+use App\Models\Brand;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tests\TestCase;
 
 class ReadingActionTest extends TestCase
 {
     private Brand $brand;
+
     private BrandResource $brandRead;
 
     public function test_it_reads(): void

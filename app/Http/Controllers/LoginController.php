@@ -6,13 +6,15 @@ use App\Actions\LoginAction;
 
 class LoginController extends Controller
 {
-    public function __invoke(): string {
+    public function __invoke(): string
+    {
         return json_encode([
-            'token' => $this->getToken()
+            'token' => $this->getToken(),
         ]);
     }
 
-    private function getToken(): string {
+    private function getToken(): string
+    {
         return (new LoginAction)->getToken(
             email: request()->email,
             password: request()->password

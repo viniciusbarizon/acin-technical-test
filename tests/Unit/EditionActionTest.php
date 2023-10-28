@@ -3,9 +3,8 @@
 namespace Tests\Unit;
 
 use App\Actions\EditionAction;
-use App\Models\Brand;
 use App\Http\Resources\BrandResource;
-use Error;
+use App\Models\Brand;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,8 +14,11 @@ class EditionActionTest extends TestCase
     use RefreshDatabase;
 
     private Brand $brand;
+
     private string $id;
+
     private string $name;
+
     private $response;
 
     public function test_it_updates(): void
@@ -91,5 +93,4 @@ class EditionActionTest extends TestCase
     {
         $this->assertEquals($this->name, $this->brand->name);
     }
-
 }

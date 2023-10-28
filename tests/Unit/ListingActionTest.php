@@ -5,20 +5,21 @@ namespace Tests\Unit;
 use App\Actions\ListingAction;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
-use Error;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\RelationNotFoundException;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Tests\TestCase;
 
 class ListingActionTest extends TestCase
 {
     private Collection $brands;
+
     private Brand $brand;
+
     private BrandResource $list;
+
     private ?int $paginate = null;
+
     private ?string $whereColumn = null;
+
     private ?string $whereValue = null;
 
     public function test_it_lists_all_brands(): void
@@ -61,7 +62,7 @@ class ListingActionTest extends TestCase
 
     private function setWheres(): void
     {
-        $this->whereColumn = "name";
+        $this->whereColumn = 'name';
         $this->whereValue = $this->brand->name;
     }
 

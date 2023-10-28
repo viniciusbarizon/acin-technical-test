@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use App\Actions\RemovalAction;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
-use Error;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -15,6 +14,7 @@ class RemovalActionTest extends TestCase
     use RefreshDatabase;
 
     private Brand $brand;
+
     private string $id;
 
     public function test_it_deletes_a_brand(): void

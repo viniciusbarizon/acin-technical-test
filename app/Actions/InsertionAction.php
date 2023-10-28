@@ -12,8 +12,7 @@ class InsertionAction
             return new $resource(
                 $model::create($data)
             );
-        }
-        catch (QueryException) {
+        } catch (QueryException) {
             return response('Please, do not use values used by other records', 409);
         }
     }

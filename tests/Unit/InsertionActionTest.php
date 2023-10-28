@@ -3,9 +3,8 @@
 namespace Tests\Unit;
 
 use App\Actions\InsertionAction;
-use App\Models\Brand;
 use App\Http\Resources\BrandResource;
-use Error;
+use App\Models\Brand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,6 +13,7 @@ class InsertionActionTest extends TestCase
     use RefreshDatabase;
 
     private Brand $brand;
+
     private $response;
 
     public function test_it_inserts_a_brand(): void

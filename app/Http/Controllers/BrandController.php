@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 class BrandController extends Controller
 {
     const MODEL = Brand::class;
+
     const RESOURCE = BrandResource::class;
 
     /**

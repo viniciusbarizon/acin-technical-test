@@ -9,7 +9,9 @@ use Illuminate\Validation\ValidationException;
 class LoginAction
 {
     private string $email;
+
     private ?User $user;
+
     private string $password;
 
     public function getToken(string $email, string $password): string

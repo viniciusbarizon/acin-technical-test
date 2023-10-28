@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -20,18 +19,21 @@ class LoginTest extends TestCase
         $this->assertToken();
     }
 
-    private function setResponse(): void {
+    private function setResponse(): void
+    {
         $this->response = $this->post(
             '/api/login',
             ['email' => $this->getEmail(), 'password' => 'password']
         );
     }
 
-    private function getEmail(): string {
+    private function getEmail(): string
+    {
         return User::first()->email;
     }
 
-    private function assertToken(): void {
+    private function assertToken(): void
+    {
         $this->response->assertStatus(200)
             ->assertJsonStructure(['token']);
     }
