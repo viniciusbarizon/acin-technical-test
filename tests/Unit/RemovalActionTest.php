@@ -3,9 +3,10 @@
 namespace Tests\Unit;
 
 use App\Actions\RemovalAction;
-use App\Http\Resources\RemovalResource;
+use App\Http\Resources\BrandResource;
 use App\Models\Brand;
 use Error;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,14 +14,13 @@ class RemovalActionTest extends TestCase
 {
     use RefreshDatabase;
 
-    private string $model = Brand::class;
-    private BrandResource $resource;
+    private string $id;
 
     public function test_it_deletes_a_brand(): void {
+        $this->setId();
         $this->remove();
 
-        $this->assertResource();
-        $this->assertMissing();
+        $this->assertDeleted();
     }
 
     public function test_it_returns_model_not_found_exception_if_brand_does_not_exist(): void {
@@ -31,26 +31,19 @@ class RemovalActionTest extends TestCase
         $this->remove();
     }
 
-    private function getRandomId(): string {
-        return Brand::inRandomOrder()->first()->id;
+    private function setId(): void {
+        $this->id = Brand::inRandomOrder()->first()->id;
     }
 
     private function remove(): void {
-        $this->resource = (new RemovalAction)->delete(
-            id: $this->getRandomId(),
-            model: $this->model,
-            resource: $this->resource
+        (new RemovalAction)->delete(
+            id: $this->id,
+            model: Brand::class,
+            resource: BrandResource::class
         );
     }
 
-    private function assertResource(): void {
-        $this->assertEquals(
-            $this->resource,
-            get_class($this->resource)
-        );
-    }
-
-    private function assertMissing(): void {
+    private function assertDeleted(): void {
         $this->assertDatabaseMissing('brands', [
             'id' => $this->id,
             'deleted_at' => null
