@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class BrandSeeder extends Seeder
 {
@@ -14,17 +13,8 @@ class BrandSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('brands')->insert([
-            ['id' => str()->ulid(), 'name' => 'Volkswagen'],
-            ['id' => str()->ulid(), 'name' => 'Toyota'],
-            ['id' => str()->ulid(), 'name' => 'Mercedes Benz'],
-            ['id' => str()->ulid(), 'name' => 'Ford'],
-            ['id' => str()->ulid(), 'name' => 'General Motors'],
-            ['id' => str()->ulid(), 'name' => 'Honda'],
-            ['id' => str()->ulid(), 'name' => 'Hyundai'],
-            ['id' => str()->ulid(), 'name' => 'BMW'],
-            ['id' => str()->ulid(), 'name' => 'Nissan'],
-            ['id' => str()->ulid(), 'name' => 'Tesla'],
-        ]);
+        for ($i = 1; $i <= 10; $i++) {
+            Brand::factory()->create();
+        }
     }
 }
