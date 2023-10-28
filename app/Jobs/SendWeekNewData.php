@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Exports\WeekNewData;
 use App\Models\Brand;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -34,5 +33,10 @@ class SendWeekNewData implements ShouldQueue
         Brand::whereBetween('created_at', [now()->subWeek()->format("Y-m-d H:i:s"), now()])
             ->get()
             ->storeExcel('excel/week-new-data.xlsx');
+    }
+
+    private function sendEmail(): void
+    {
+
     }
 }
