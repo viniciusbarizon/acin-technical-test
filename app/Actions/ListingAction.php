@@ -34,7 +34,7 @@ class ListingAction {
 
     private function getList(): Collection|LengthAwarePaginator
     {
-        $result = $this->model;
+        $result = $this->model->withTrashed();
 
         if (is_string($this->whereColumn) && is_null($this->whereValue) === false) {
             $result = $result->where($this->whereColumn, "like", "%" . $this->whereValue . "%");

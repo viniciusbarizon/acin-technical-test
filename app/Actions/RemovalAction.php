@@ -6,9 +6,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class RemovalAction
 {
-    public function delete(string $id, string $model, string $resource): void
+    public function remove(string $id, string $model, string $resource): JsonResource
     {
-        new $resource(
+        return new $resource(
             tap($model::findOrFail($id))->delete()
         );
     }

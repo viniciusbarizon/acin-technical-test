@@ -48,7 +48,7 @@ class RemovalActionTest extends TestCase
 
     private function remove(): void
     {
-        (new RemovalAction)->delete(
+        (new RemovalAction)->remove(
             id: $this->id,
             model: Brand::class,
             resource: BrandResource::class
