@@ -6,12 +6,14 @@ use Illuminate\Database\QueryException;
 
 class InsertionAction
 {
-    public function insert(array $data, string $model): mixed {
+    public function insert(array $data, string $model, string $resource): mixed {
         try {
-            return $model::create($data);
+            return new $resource(
+                $model::create($data)
+            );
         }
         catch (QueryException) {
-            return response('Please, do not use values used by other records', 403);
+            return response('Please, do not use values used by other records', 409);
         }
     }
 }
