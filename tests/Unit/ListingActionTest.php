@@ -17,6 +17,7 @@ class ListingActionTest extends TestCase
     private Collection $brands;
     private Brand $brand;
     private BrandResource $list;
+    private ?int $paginate = null;
     private ?string $whereColumn = null;
     private ?string $whereValue = null;
 
@@ -57,7 +58,8 @@ class ListingActionTest extends TestCase
     private function list(): void
     {
         $this->list = (new ListingAction)->list(
-            model: Brand::class,
+            model: (new Brand),
+            paginate: $this->paginate,
             resource: BrandResource::class,
             whereColumn: $this->whereColumn,
             whereValue: $this->whereValue
