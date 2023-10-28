@@ -2,14 +2,14 @@
 
 namespace Tests\Unit;
 
-use App\Actions\ReaderAction;
+use App\Actions\ReadingAction;
 use App\Models\Brand;
 use App\Http\Resources\BrandResource;
 use Error;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tests\TestCase;
 
-class ReaderActionTest extends TestCase
+class ReadingActionTest extends TestCase
 {
     private Brand $brand;
     private BrandResource $brandRead;
@@ -40,7 +40,7 @@ class ReaderActionTest extends TestCase
     }
 
     private function read(): void {
-        $this->brandRead = (new ReaderAction)->read(
+        $this->brandRead = (new ReadingAction)->read(
             id: $this->id,
             model: Brand::class,
             resource: BrandResource::class
